@@ -1,0 +1,1 @@
+CreateObject("Wscript.shell").Run "C:\Users\AKASH-PC\Documents\Python\offline\projects\24x7_running\automate.bat",0,True
