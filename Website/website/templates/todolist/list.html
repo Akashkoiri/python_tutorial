@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="">
+    <title>Todo List</title>
+{% endblock %}
+
+{% block 'body' %}
+
+    <form action="" method="post">
+        {% for i in list %}
+            <p>{{i}}</p>
+        {% endfor %}
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
