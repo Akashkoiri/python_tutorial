@@ -4,50 +4,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS & JS  -->
-    <title>Lobby</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script defer src="/static/main.js"></script>
+    <title>Whatsapp</title>
 </head>
-
 <body>
-    <h1>Let's chat!</h1>
+    <div class="container">
+        <!-- Left SIde -->
+        <div class="leftside">
+            <div class="header">
+                <!-- Header -->
+                <div class="userimg">
+                    <img src="/static/panther.png" class="cover">
+                    <h4>Akash koiri<br><span>onlin</span></h4>
+                </div>
+                <ul class="nav_icons">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <!-- Search box -->
+            <div class="search_chat">
+                <div>
+                    <input type="text" placeholder="Search or start new chat">
+                    <ion-icon name="search-outline"></ion-icon>
+                </div>
+            </div>
+            <!-- Chat List -->
+            <div class="chatlist">
+                <!-- This is one block of user from the List -->
+                <div class="block active">
+                    <div class="imgbx">
+                        <img src="/static/panther.png" class="cover">
+                    </div>
+                    <div class="details">
+                        <div class="listHead">
+                            <h4>Sujal Das</h4>
+                            <p class="time">10:56</p>
+                        </div>
+                        <div class="message_p">
+                            <p>Hi buddy how are you</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="block unread">
+                    <div class="imgbx">
+                        <img src="/static/panther.png" class="cover">
+                    </div>
+                    <div class="details">
+                        <div class="listHead">
+                            <h4>Sujal Das</h4>
+                            <p class="time">10:56</p>
+                        </div>
+                        <div class="message_p">
+                            <p>Hi buddy how are you</p>
+                            <b>1</b>
+                        </div>
+                    </div>
+                </div>
 
-    <form id="form">
-        <input type="text" name="message">
-        <input type="submit" value="Submit">
-    </form>
+            </div>
+        </div>
 
-    <div id="messages"></div>
+        <!-- Right side -->
+        <div class="rightside">
+            <!-- Header -->
+            <div class="header">
+                <div class="imgText">
+                    <div class="userimg">
+                        <img src="/static/panther.png" class="cover">
+                    </div>
+                    <h4 id="username">{{request.session.username}}<br><span>online</span></h4>
+                </div>
+                <ul class="nav_icons">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            
+            <!-- Chat Box -->
+            <div class="chatbox">
+                <div class="message my_message">
+                    <p>Hi<br><span>12:15</span></p>
+                </div>
+                <div class="message frnd_message">
+                    <p>Hello<br><span>12:16</span></p>
+                </div>
+            </div>
+            <!-- Chat input -->
+            <div class="chatbox_input">
+                <form id="form" method="post">
+                    {% csrf_token %}
+                    <ion-icon name="happy-outline"></ion-icon>
+                    <ion-icon name="attach-outline"></ion-icon>
+                    <input type="text" name="message" placeholder="Type a message">
+                    <ion-icon name="mic"></ion-icon>
+                </form>
+            </div>
+
+        </div>
 
 
-    <script type="text/javascript">
-        let url =`ws://${window.location.host}/ws/socket/`;
+    </div>
 
-        // Getting backend data through the socket
-        const chatSocket = new WebSocket(url);
-        chatSocket.onmessage = function(e) {
-            let data = JSON.parse(e.data);
 
-            if(data.type === 'chat') {
-                let messages = document.getElementById('messages')
-                
-                messages.insertAdjacentHTML('beforeend', 
-                `<div>
-                    <p>${data.message}</p>
-                </div>`)
-            }
-        }
 
-        // Sending form data to backend
-        let form = document.getElementById('form')
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            let message = e.target.message.value
-            chatSocket.send(JSON.stringify({
-                'message': message
-            }))
-            form.reset()
-        })
-
-    </script>
 </body>
 </html>

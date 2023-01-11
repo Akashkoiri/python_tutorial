@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <script defer src="/static/main.js"></script>
+
+    <title>Lobby</title>
+</head>
+
+<body>
+    <main>
+        <div class="head">
+            <h1>Let's chat!</h1>
+            
+            <div class="profile">
+                <span id="username">{{request.session.username}}</span>
+            </div>
+
+            <div class="form">
+                <form id="form">
+                    <input type="text" name="message">
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        <div id="messages"></div>
+    </main>
+</body>
+</html>
